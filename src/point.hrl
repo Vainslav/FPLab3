@@ -1,0 +1,2 @@
+-record(point, {x :: integer() | float(), y :: integer() | float()}).
+-type point() :: #point{}.
