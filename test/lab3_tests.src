@@ -1,0 +1,37 @@
+-module(lab3_tests).
+-include_lib("eunit/include/eunit.hrl").
+-include("point.hrl").
+
+-export([run_tests/0]).
+
+sample_points() ->
+    [
+        #point{x = 0.0, y = 0.0},
+        #point{x = 1.0, y = 1.0},
+        #point{x = 2.0, y = 4.0},
+        #point{x = 3.0, y = 9.0},
+        #point{x = 4.0, y = 16.0}
+    ].
+
+linear_calc_y_test_() ->
+    P1 = #point{x = 0.0, y = 0.0},
+    P2 = #point{x = 2.0, y = 4.0},
+    [
+        ?_assertEqual(0.0, linear:calc_y(P1, P2, 0.0)),
+        ?_assertEqual(2.0, linear:calc_y(P1, P2, 1.0)),
+        ?_assertEqual(4.0, linear:calc_y(P1, P2, 2.0)),
+        ?_assertEqual(6.0, linear:calc_y(P1, P2, 3.0))
+    ].
+
+newton_interpolation_test_() ->
+    Points = [
+        #point{x = 0.0, y = 0.0},
+        #point{x = 1.0, y = 1.0},
+        #point{x = 2.0, y = 4.0}
+    ],
+    [
+        ?_assertEqual({ok, 0.0}, newton_interpolation:interpolate(Points, 0.0)),
+        ?_assertEqual({ok, 1.0}, newton_interpolation:interpolate(Points, 1.0)),
+        ?_assertEqual({ok, 4.0}, newton_interpolation:interpolate(Points, 2.0)),
+        ?_assertEqual({ok, 2.25}, newton_interpolation:interpolate(Points, 1.5))
+    ].
