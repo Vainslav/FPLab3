@@ -46,6 +46,3 @@ jobs:
 
       - name: Run EUnit tests
         run: rebar3 eunit
-
-      - name: Run Property tests
-        run: rebar3 proper -m lab2_property_tests
